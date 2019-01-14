@@ -1,8 +1,8 @@
 <?php
 require ("./staffs.php");
- $data = array();
+$data = array();
 $errors = array();
- $is_update_action = false;
+$is_update_action = false;
 if (!empty($_GET['id']))
 {
     $data = getStaff($_GET['id']);
@@ -12,8 +12,8 @@ if (!empty($_POST['add_staff']))
 {
     $data['staff_id'] = isset($_POST['id']) ? $_POST['id'] : '';
     $data['staff_name'] = isset($_POST['name']) ? $_POST['name'] : '';
-    $data['staff_Sex'] = isset($_POST['Sex']) ? $_POST['Sex'] : '';
-    $data['staff_Age'] = isset($_POST['Age']) ? $_POST['Age'] : ''; 
+    $data['staff_sex'] = isset($_POST['sex']) ? $_POST['sex'] : '';
+    $data['staff_age'] = isset($_POST['age']) ? $_POST['age'] : ''; 
     if (empty($data['staff_id'])){
         $errors['staff_id'] = 'Ban chua nhap ID';
     }
@@ -22,14 +22,13 @@ if (!empty($_POST['add_staff']))
         $errors['staff_name'] = 'Ban chua nhap name';
     }
      
-    if (empty($data['staff_Sex'])){
-        $errors['staff_Sex'] = 'Ban chua nhap Sex';
-    }
-    if (empty($data['staff_Age'])){
-        $errors['staff_Age'] = 'Ban chua nhap Age';
+    if (empty($data['staff_sex'])){
+        $errors['staff_sex'] = 'Ban chua nhap sex';
+    } if (empty($data['staff_age'])){
+        $errors['staff_age'] = 'Ban chua nhap age';
     }
     if (empty($errors)){
-        updateStaff($data['staff_id'], $data['staff_name'], $data['staff_Sex'], $data['staff_Age']);
+        updateStaff($data['staff_id'], $data['staff_name'], $data['staff_sex'],$data['staff_age']);
         header("Location:staff-list.php");
     }
 }
@@ -38,12 +37,12 @@ if (!empty($_POST['add_staff']))
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Thêm nhan viên</title>
+        <title>Thêm sinh viên</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <a href="staff1-list.php">BACK</a>
+        <a href="staff-list.php">BACK</a>
         <form method="post">
             <table border="1" cellspacing="0" cellpadding="10">
                 <tr>
@@ -61,16 +60,16 @@ if (!empty($_POST['add_staff']))
                     </td>
                 </tr>
                 <tr>
-                    <td>Sex</td>
+                    <td>sex</td>
                     <td>
-                        <input type="text" name="Sex" value="<?php echo !empty($data['staff_Sex']) ? $data['staff_sex'] : ''; ?>" />
-                        <?php echo !empty($errors['staff_Sex']) ? $errors['staff_sex'] : ''; ?>
+                        <input type="text" name="sex" value="<?php echo !empty($data['staff_sex']) ? $data['staff_sex'] : ''; ?>" />
+                        <?php echo !empty($errors['staff_sex']) ? $errors['staff_sex'] : ''; ?>
                     </td>
                 </tr>
                 <tr>
-                    <td>Age</td>
+                    <td>age</td>
                     <td>
-                        <input type="text" name="Age" value="<?php echo !empty($data['staff_age']) ? $data['staff_age'] : ''; ?>" />
+                        <input type="text" name="age" value="<?php echo !empty($data['staff_age']) ? $data['staff_age'] : ''; ?>" />
                         <?php echo !empty($errors['staff_age']) ? $errors['staff_age'] : ''; ?>
                     </td>
                 </tr>

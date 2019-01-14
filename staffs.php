@@ -19,26 +19,29 @@ function getStaff($staff_id)
 function deleteStaff($staff_id)
 {
     $staffs = getAllStaffs();
+   
     foreach ($staffs as $key => $item)
     {
         if ($item['staff_id'] == $staff_id){
             unset($staffs[$key]);
+
         }
     }
     $_SESSION['staffs'] = $staffs;
      
     return $staffs;
 } 
-function updateStaff($staff_id, $staff_name, $staff_Sex, $staff_Age )
+function updateStaff($staff_id, $staff_name, $staff_sex, $staff_age )
 {
     $staffs = getAllStaffs();
     $new_staff = array(
         'staff_id' => $staff_id,
         'staff_name' => $staff_name,
-        'staff_Sex' => $staff_Sex,
-        'staff_Age' => $staff_Age
+        'staff_sex' => $staff_sex,
+        'staff_age' => $staff_age
     );
     $is_update_action = false;
+    //edit
     foreach ($staffs as $key => $item)
     {
         if ($item['staff_id'] == $staff_id){
@@ -46,6 +49,7 @@ function updateStaff($staff_id, $staff_name, $staff_Sex, $staff_Age )
             $is_update_action = true;
         }
     }
+    // add
     if (!$is_update_action){
         $staffs[] = $new_staff;
     }
